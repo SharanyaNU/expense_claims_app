@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Claims Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Expense Claims</h1>
+    <label class="acting">Acting as
+      <select id="acting-as" data-testid="acting-as"></select>
+    </label>
+  </header>
+
+  <nav>
+    <button class="tab active" data-tab="mine" data-testid="tab-mine">My claims</button>
+    <button class="tab" data-tab="approvals" data-testid="tab-approvals">Approvals</button>
+    <button class="tab" data-tab="finance" data-testid="tab-finance">Finance</button>
+    <button class="tab" data-tab="reports" data-testid="tab-reports">Reports</button>
+  </nav>
+
+  <div id="toast" role="status" data-testid="toast" hidden></div>
+
+  <main>
+    <section id="tab-mine">
+      <h2>New claim</h2>
+      <form id="claim-form" data-testid="claim-form">
+        <label>Category <select name="category_code" data-testid="field-category" required></select></label>
+        <label>Date <input type="date" name="expense_date" data-testid="field-date" required></label>
+        <label>Amount (USD) <input type="number" name="amount" step="0.01" min="0.01" data-testid="field-amount" required></label>
+        <label>Merchant <input name="merchant" maxlength="120" data-testid="field-merchant" required></label>
+        <label class="wide">Description <input name="description" maxlength="500" data-testid="field-description" required></label>
+        <label class="wide" id="attendees-field" hidden>Attendees <input name="attendees" maxlength="500" data-testid="field-attendees"></label>
+        <label class="check"><input type="checkbox" name="has_receipt" data-testid="field-receipt"> I have a receipt</label>
+        <p class="hint" id="policy-hint" data-testid="policy-hint"></p>
+        <button type="submit" data-testid="save-draft">Save as draft</button>
+      </form>
+
+      <h2>My claims</h2>
+      <table data-testid="my-claims">
+        <thead><tr><th>#</th><th>Date</th><th>Category</th><th>Merchant</th><th class="num">Amount</th><th>Status</th><th>Policy</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="tab-approvals" hidden>
+      <h2>Waiting for your decision</h2>
+      <p id="approvals-note" class="hint"></p>
+      <div id="inbox" data-testid="approval-inbox"></div>
+    </section>
+
+    <section id="tab-finance" hidden>
+      <div class="coming-soon" data-testid="finance-coming-soon">
+        <h2>Finance payouts</h2>
+        <p>Coming soon: approved claims grouped into payout batches, payment references and paid status.</p>
+      </div>
+    </section>
+
+    <section id="tab-reports" hidden>
+      <div class="coming-soon" data-testid="reports-coming-soon">
+        <h2>Reports</h2>
+        <p>Coming soon: spend by department, category and month, and policy-exception trends.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
